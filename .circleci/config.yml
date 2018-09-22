@@ -43,6 +43,7 @@ jobs:
           command: |
             . venv/bin/activate
             coverage html
+            codecov
 
       - store_test_results:
           path: test-reports

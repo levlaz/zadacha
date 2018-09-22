@@ -10,6 +10,7 @@ setup(
         'flask-sqlalchemy',
         'flask-migrate',
         'flask-wtf',
-        'psycopg2-binary'
+        'psycopg2-binary',
+        'ldclient-py'
     ]
 )

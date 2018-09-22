@@ -1,3 +1,6 @@
+import os
+import ldclient
+
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -6,7 +9,7 @@ from zadacha.config import config
 
 db = SQLAlchemy()
 migrate = Migrate()
-
+ldclient.set_sdk_key(os.environ.get("LD_SDK_KEY"))
 
 def create_app(config_name):
     """Flask application factory.

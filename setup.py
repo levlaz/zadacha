@@ -10,6 +10,6 @@ setup(
         'flask-sqlalchemy',
         'flask-migrate',
         'flask-wtf',
-        'psycopg2'
+        'psycopg2-binary'
     ]
 )

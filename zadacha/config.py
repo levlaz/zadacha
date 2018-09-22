@@ -4,6 +4,7 @@ import os
 class Config:
     """Base Config class"""
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod
     def init_app(app):

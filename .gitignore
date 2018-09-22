@@ -1,0 +1,7 @@
+# python
+venv/
+*.egg-info
+__pycache__
+
+# ide
+.vscode

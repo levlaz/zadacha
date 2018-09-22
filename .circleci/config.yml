@@ -1,0 +1,48 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python
+      - image: circleci/postgres
+        environment:
+          POSTGRES_USER: zadacha
+          POSTGRES_DB: zadacha
+          POSTGRES_PASSWORD: zadacha
+    working_directory: ~/zadacha
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "setup.py" }}
+            - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r dev-requirements.txt
+            pip install -e .
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "setup.py" }}
+
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            make test
+
+      - run:
+          name: generate coverage report
+          when: always
+          command: |
+            . venv/bin/activate
+            coverage html
+
+      - store_artifacts:
+          path: htmlcov/

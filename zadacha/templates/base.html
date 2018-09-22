@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %} Zadacha {% endblock %}
+        </title>
+
+        {% block head %}
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/zadacha.css') }}">
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock %}
+
+        {% block scripts %}
+        {% endblock %}
+    </body>
+</html>

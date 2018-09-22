@@ -8,4 +8,4 @@ core = Blueprint('core', __name__, template_folder='templates')
 
 @core.route('/')
 def index():
-    return 'core route'
+    return render_template("home.html")

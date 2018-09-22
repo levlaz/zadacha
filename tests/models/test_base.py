@@ -13,6 +13,7 @@ class DummyModel(Base):
     unique_label = db.Column(db.String, unique=True)
     created = db.Column(db.DateTime, default=datetime.utcnow)
 
+
 class TestBaseModel(unittest.TestCase):
 
 

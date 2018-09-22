@@ -17,4 +17,4 @@ run:
 	flask run --host=0.0.0.0
 
 test:
-	coverage run -m unittest discover tests
+	coverage run tests/main.py

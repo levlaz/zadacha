@@ -44,5 +44,11 @@ jobs:
             . venv/bin/activate
             coverage html
 
+      - store_test_results:
+          path: test-reports
+
       - store_artifacts:
-          path: htmlcov/
+          path: htmlcov
+
+      - store_artifacts:
+          path: test-reports

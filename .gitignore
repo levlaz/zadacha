@@ -5,3 +5,7 @@ __pycache__
 
 # ide
 .vscode
+
+# testing
+.coverage
+test-reports/

@@ -16,6 +16,10 @@ run:
 	export FLASK_DEBUG=true && \
 	flask run --host=0.0.0.0
 
+shell:
+	export FLASK_APP=run.py && \
+	flask shell
+
 test:
 	export FLASK_CONFIG=testing && \
 	set -e && coverage run tests/main.py

@@ -44,7 +44,9 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    DEBUG = True
+    DEBUG = False
+    LOGIN_DISABLED = False
+    WTF_CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'postgresql://{0}:{0}@{1}/{0}'.format(
             'zadacha',
             'localhost')

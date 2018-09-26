@@ -11,16 +11,8 @@ class CoreTestCase(ClientTestCase):
     def test_login_logout(self):
         u = self.addUser()
         resp = self.login(u.email, u.password)
-        self.assertTrue("Log Out" in resp.get_data(as_text=True))
+
+        self.assertTrue("Sign Out" in resp.get_data(as_text=True))
 
         resp = self.logout()
-        self.assertTrue("Log In" in resp.get_data(as_text=True))
-
-    def test_login_logged(self):
-        u = self.addUser()
-        uLastLogin = u.last_login_at
-
-        self.login(u.email, u.password)
-
-        uLasLoginUpdated = u.last_login_at
-        self.assertNotEqual(uLastLogin, uLasLoginUpdated)
+        self.assertTrue("Sign In" in resp.get_data(as_text=True))

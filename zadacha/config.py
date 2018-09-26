@@ -65,6 +65,12 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     SECURITY_CONFIRMABLE = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql://{0}:{1}@{2}/{3}'.format(
+            os.environ.get('DB_USER'),
+            os.environ.get('DB_PASSWORD'),
+            "db",
+            "zadacha"
+    )
 
 config = {
         'development': DevelopmentConfig,

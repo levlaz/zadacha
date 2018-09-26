@@ -12,6 +12,7 @@ setup(
         'flask-wtf',
         'psycopg2-binary',
         'ldclient-py',
-        'flask-security'
+        'flask-security',
+        'gunicorn'
     ]
 )

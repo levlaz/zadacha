@@ -9,3 +9,6 @@ __pycache__
 # testing
 .coverage
 test-reports/
+
+# extra files
+data/

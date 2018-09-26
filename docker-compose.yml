@@ -1,0 +1,22 @@
+version: '3'
+services:
+  app:
+    image: levlaz/zadacha
+    environment:
+      - FLASK_APP=run.py
+      - FLASK_CONFIG=production
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
+    ports:
+      - "8000:8000"
+    command: ./scripts/start.sh
+  db:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_DB=zadacha
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+    volumes:
+      - ./data:/var/lib/postgresq/data
+    ports:
+      - "5432:5432"

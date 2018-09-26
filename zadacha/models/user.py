@@ -1,4 +1,5 @@
 import hashlib
+import ldclient
 
 from flask_security import UserMixin, RoleMixin
 
@@ -42,3 +43,6 @@ class User(Base, UserMixin):
         }
 
         return user
+
+    def registerable(self):
+        return ldclient.get().variation('registerable', self.get_ld_user(), False)

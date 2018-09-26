@@ -1,6 +1,5 @@
 import os
 import sys
-import logging
 
 from flask import Flask
 from flask_migrate import Migrate
@@ -24,15 +23,6 @@ def create_app(config_name):
 
     :returns: a Flask application.
     """
-    root = logging.getLogger()
-    root.setLevel(logging.DEBUG)
-
-    ch = logging.StreamHandler(sys.stdout)
-    ch.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - %(name)s:%(lineno)d - %(levelname)s - %(message)s')
-    ch.setFormatter(formatter)
-    root.addHandler(ch)
-
     app = Flask('zadacha')
     app.config.from_object(config[config_name])
 

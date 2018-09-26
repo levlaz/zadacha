@@ -37,9 +37,16 @@ class User(Base, UserMixin):
     def get_ld_user(self):
         user = {
             'key': self.get_user_hash(),
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'email': self.email,
+            'ip': self.current_login_ip,
+
             'custom': {
                 'previous_login': self.last_login_at,
             },
+
+            'privateAttributeNames': ['email']
         }
 
         return user

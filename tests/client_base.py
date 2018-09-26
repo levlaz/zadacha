@@ -1,8 +1,9 @@
 import os
 import unittest
+import datetime
 
-from zadacha.factory import create_app
-
+from zadacha.factory import create_app, db
+from zadacha.models.user import User
 
 class ClientTestCase(unittest.TestCase):
 
@@ -14,3 +15,18 @@ class ClientTestCase(unittest.TestCase):
 
     def tearDown(self):
         self.app_context.pop()
+
+    def addUser(self):
+        u = User(email='test@example.com', password='password', confirmed_at=datetime.datetime.utcnow)
+        db.session.add(u)
+        db.session.commit()
+        return u
+
+    def login(self, email, password):
+        return self.client.post('/auth/login', data=dict(
+            email = email,
+            password = password,
+        ), follow_redirects=True)
+
+    def logout(self):
+        return self.client.get('/auth/logout', follow_redirects=True)

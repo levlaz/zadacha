@@ -3,7 +3,7 @@
 sudo apt install -y rsync
 
 # Send Latest Scripts to Production Server
-rsync -avz scripts/ $PROD_SERVER:/var/www/zadacha/scripts/
+rsync -o StrictHostKeyChecking=no -avz scripts/ $PROD_SERVER:/var/www/zadacha/scripts/
 # TODO add /etc rsync -avz etc/ $PROD_SERVER:/var/www/zadacha/etc/
 scp -o StrictHostKeyChecking=no docker-compose.yml $PROD_SERVER:/var/www/zadacha
 

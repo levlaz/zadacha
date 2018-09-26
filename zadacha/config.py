@@ -76,6 +76,12 @@ class ProductionConfig(Config):
     def init_app(cls, app):
         Config.init_app(app)
 
+        with app.app_context():
+            from zadacha.factory import db
+            from zadacha.models.user import User
+
+            db.init_app(app)
+
         import logging
         from logging.handlers import SysLogHandler
         syslog_handler = SysLogHandler()

@@ -11,6 +11,7 @@ setup(
         'flask-migrate',
         'flask-wtf',
         'psycopg2-binary',
-        'ldclient-py'
+        'ldclient-py',
+        'flask-security'
     ]
 )

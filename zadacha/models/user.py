@@ -1,26 +1,44 @@
-from werkzeug.security import generate_password_hash, check_password_hash
+import hashlib
+
+from flask_security import UserMixin, RoleMixin
 
 from zadacha.factory import db
 from zadacha.models.base import Base
 
+roles_users = db.Table('roles_users',
+    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+    db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
-class User(Base):
+class Role(Base, RoleMixin):
+    name = db.Column(db.String(80), unique=True)
+    description = db.Column(db.String(255))
+
+class User(Base, UserMixin):
     """User Model"""
-    __tablename__ = "users"
-    username = db.Column(db.String(256))
+    first_name = db.Column(db.String(254))
+    last_name = db.Column(db.String(254))
     email = db.Column(db.String(254), unique=True, index=True)
-    password_hash = db.Column(db.String(256))
+    password = db.Column(db.String(255))
+    active = db.Column(db.Boolean())
+    confirmed_at = db.Column(db.DateTime())
+    last_login_at = db.Column(db.DateTime())
+    current_login_at = db.Column(db.DateTime())
+    last_login_ip = db.Column(db.String(50))
+    current_login_ip = db.Column(db.String(50))
+    login_count = db.Column(db.Integer())
 
+    roles = db.relationship('Role', secondary=roles_users,
+        backref=db.backref('users', lazy='dynamic'))
 
-    @property
-    def password(self):
-        raise AttributeError('password is not a readable attribute')
+    def get_user_hash(self):
+        return hashlib.md5(self.email.encode()).hexdigest()
 
+    def get_ld_user(self):
+        user = {
+            'key': self.get_user_hash(),
+            'custom': {
+                'previous_login': self.last_login_at,
+            },
+        }
 
-    @password.setter
-    def password(self, password):
-        self.password_hash = generate_password_hash(password, method='pbkdf2:sha512')
-
-
-    def verify_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        return user

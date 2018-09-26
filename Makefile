@@ -17,4 +17,5 @@ run:
 	flask run --host=0.0.0.0
 
 test:
+	export FLASK_CONFIG=testing
 	coverage run tests/main.py

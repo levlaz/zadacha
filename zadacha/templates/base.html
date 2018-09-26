@@ -11,6 +11,21 @@
     </head>
 
     <body>
+        {% block heading %}
+        <div class="heading">
+                <a class="left" href="{{ url_for('core.index') }}">Home</a>
+
+        {% if current_user.is_authenticated %}
+                <a class="right" href="{{ url_for('security.logout') }}">Sign Out</a>
+        {% else %}
+            <a class="right" href="{{ url_for('security.register') }}">Sign Up</a>
+            <a class="right" href="{{ url_for('security.login') }}">Sign In</a>
+        {% endif %}
+        </div>
+
+        <div class="clearfix"></div>
+
+        {% endblock %}
         {% block content %}
         {% endblock %}
 

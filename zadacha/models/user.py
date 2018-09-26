@@ -50,6 +50,3 @@ class User(Base, UserMixin):
         }
 
         return user
-
-    def registerable(self):
-        return ldclient.get().variation('registerable', self.get_ld_user(), False)

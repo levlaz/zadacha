@@ -18,4 +18,4 @@ run:
 
 test:
 	export FLASK_CONFIG=testing && \
-	coverage run tests/main.py
+	set -e && coverage run tests/main.py

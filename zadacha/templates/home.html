@@ -5,5 +5,32 @@
 {% endblock %}
 
 {% block content %}
-<h1> Welcome to Zadacha </h1>
+<h1> Zadacha </h1>
+
+<div class="main">
+    <div class="toolbar">
+        <p>
+            Add a task here.
+        </p>
+        <form method="POST" action="/">
+            {{ form.csrf_token }}
+            {{ form.title.label }}
+            {{ form.title(size=20) }}
+            <input type="submit" value="Add Task">
+        </form>
+    </div>
+
+    <div class="Inbox">
+        <p>
+            This is where all of your tasks live.
+        </p>
+        <h2> Inbox </h2>
+        <ul>
+        {% for task in current_user.tasks %}
+            <li>{{ task.title }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}
+

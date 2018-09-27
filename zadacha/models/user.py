@@ -31,6 +31,9 @@ class User(Base, UserMixin):
     roles = db.relationship('Role', secondary=roles_users,
         backref=db.backref('users', lazy='dynamic'))
 
+    tasks = db.relationship('Task', backref='creator',
+        lazy=True, cascade='all, delete-orphan')
+
     def get_user_hash(self):
         return hashlib.md5(self.email.encode()).hexdigest()
 

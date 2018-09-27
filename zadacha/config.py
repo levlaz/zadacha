@@ -1,5 +1,6 @@
 import os
 import ldclient
+import datetime
 
 class Config:
     """Base Config class"""
@@ -38,8 +39,19 @@ class DevelopmentConfig(Config):
         with app.app_context():
             from zadacha.factory import db
             from zadacha.models.user import User
+            from zadacha.models.task import Task
 
             db.init_app(app)
+
+            # Create Admin User
+            if not User.query.filter_by(email='admin').first():
+                u = User(
+                    email='admin',
+                    password='password',
+                    active=True,
+                    confirmed_at=datetime.datetime.utcnow())
+                db.session.add(u)
+                db.session.commit()
 
 
 class TestingConfig(Config):
